@@ -1,4 +1,4 @@
-//httpVueLoader.register(Vue, '....vue');
+httpVueLoader.register(Vue, 'components/tree-item.vue');
 const app = new Vue({
     el: '#app',
     data: {
@@ -80,7 +80,7 @@ const app = new Vue({
                 },
             ],
         },
-        debriefs: [
+        debriefs: [ // chrono order
             {
                 id: '05494a90bcf62e86fae2d0336f974303',
                 l: [
