@@ -1,0 +1,15 @@
+{
+  "name": "tasktree",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "http-vue-loader": "^1.4.0",
+    "vue": "^2.6.4"
+  },
+  "devDependencies": {
+    "jest": "^24.7.1",
+    "unexpected": "^11.4.1"
+  }
+}
