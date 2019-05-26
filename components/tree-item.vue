@@ -1,9 +1,9 @@
 <template>
 <div :style="{marginLeft: (indent > 0 ? '10px' : null)}">
-    <div>{{i.t || '-'}} <span v-for="(ss, ii) in latestStatus" :key="ii" :title="ss.t" :style="{fontSize: '70%'}">{{ss.s || ss.t}}</span></div>
-    <div v-for="(tt, ii) in debriefTexts" :key="ii" :style="{fontStyle: 'italic', fontSize: 'small'}">{{tt}}</div>
+    <div tabindex="0">{{i.t || '-'}} <span v-for="(ss, ii) in latestStatus" :key="ii" :title="ss.t" :style="{fontSize: '70%'}">{{ss.s || ss.t}}</span></div>
+    <div v-for="(tt, ii) in debriefTexts" :key="ii" :style="{fontStyle: 'italic', fontSize: 'small'}">{{tt}}</div><!-- TODO: hide on no focus / hover -->
     <tree-item v-for="cc in (i.c || [])" :key="cc.id" :i="cc" 
-        :indent="indent+1" :debriefs="debriefs" :symbols="symbols"/>
+        :indent="indent+1" :debriefs="debriefs" :symbols="symbols"></tree-item>
 </div>
 </template>
 <script>

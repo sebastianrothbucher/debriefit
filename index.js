@@ -1,4 +1,5 @@
 httpVueLoader.register(Vue, 'components/tree-item.vue');
+httpVueLoader.register(Vue, 'components/search-box.vue');
 const app = new Vue({
     el: '#app',
     data: {
