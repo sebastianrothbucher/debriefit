@@ -1,7 +1,7 @@
 <template>
 <div>
-    <label><input type="text" size="50" v-model="search"/></label>
-    <div v-for="ll in filteredList" :key="ll.i.id">{{ll.t}}</div>
+    <label><input type="search" size="50" v-model="search"/></label>
+    <div v-for="ll in filteredList" :key="ll.i.id">{{ll.t}}</div><!-- TODO: quick add -->
 </div>
 </template>
 <script>
