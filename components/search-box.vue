@@ -1,8 +1,8 @@
 <template>
 <div class="search-box" style="position: relative" @focusin="startShow" @focusout="startHide">
-    <label class="search-box input matter-textfield-standard"><input type="search" size="50" v-model="search" placeholder=" "/><span>🔍</label>
-    <div v-if="optionsShown && filteredList.length>0" class="search-box-list" style="position: absolute; top: 100%; left: 0; background: white; font-size: small; border: 1px solid lightgrey; ">
-        <div style="padding: 8px; border-bottom: 1px solid lightgrey; " tabindex="0" v-for="ll in filteredList" :key="ll.i.id" @click="selectItem(ll.i)" @keyup-enter="selectItem(ll.i)">{{ll.t}}</div><!-- TODO: quick add -->
+    <label class="search-box input matter-textfield-standard"><input type="search" size="50" v-model="search" @focus="selectedLine=-1" @keyup.down="moveSelect(+1, $event)" @keyup.up="moveSelect(-1, $event)" @keyup.enter="selectedLine>=0 && selectItem(filteredList[selectedLine].i)" placeholder=" "/><span>🔍</label>
+    <div v-if="optionsShown && filteredList.length>0" class="search-box-list" style="position: absolute; top: 100%; left: 0; ">
+        <div :class="{'virtual-focus': selectedLine===ii}" tabindex="0" v-for="(ll, ii) in filteredList" :key="ll.i.id" @click="selectItem(ll.i)" @keyup.enter="selectItem(ll.i)">{{ll.t}}</div><!-- TODO: quick add -->
     </div>
 </div>
 </template>
@@ -11,6 +11,7 @@ module.exports = {
     props: ['tree'],
     data: () => ({
         search: '',
+        selectedLine: -1,
         optionsShown: false,
         blurTimeout: null, 
     }),
@@ -42,7 +43,12 @@ module.exports = {
         },
     },
     methods: {
+        moveSelect(dir, evnt) {
+            evnt.preventDefault();
+            this.selectedLine += dir;
+        },
         selectItem(i) {
+            this.search = '';
             this.$emit('selected', i);
         },
         startShow() {

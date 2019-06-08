@@ -1,8 +1,10 @@
 <template>
 <div class="tree-item" :style="{marginLeft: (indent > 0 ? '10px' : null)}">
-    <div tabindex="0" ref="myself" class="tree-item-title">{{i.t || '-'}} <span v-for="(ss, ii) in latestStatus" :key="ii" :title="ss.t" :style="{fontSize: '70%'}">{{ss.s || ss.t}}</span></div>
+    <div tabindex="0" ref="myself" class="tree-item-title">
+        {{i.t || '-'}} <span v-for="(ss, ii) in latestStatus" :key="ii" :title="ss.t" class="tree-item-title-status">{{ss.s || ss.t}}</span>
+    </div>
     <div v-if="debriefTexts.length>0" class="tree-item-debriefs">
-        <div v-for="(tt, ii) in debriefTexts" :key="ii" :style="{fontStyle: 'italic', fontSize: 'small'}">{{tt}}</div><!-- TODO: hide on no focus / hover -->
+        <div v-for="(tt, ii) in debriefTexts" :key="ii">{{tt}}</div><!-- TODO: hide on no focus / hover; TODO: reverse (newest top) -->
     </div>
     <div class="tree-item-children">
         <tree-item v-for="cc in (i.c || [])" :key="cc.id" :i="cc" 

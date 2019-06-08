@@ -2,7 +2,7 @@ body {
     font-family: sans-serif;
 }
 
-*:focus {
+*:focus, .virtual-focus {
     outline: none;
     background: #c6dff3;
 }
@@ -10,8 +10,25 @@ body {
 .tree-item-title {
     padding: 5px; 
 }
+.tree-item-title-status {
+    font-size: 70%;
+}
 .tree-item-debriefs {
     padding: 0 0 5px 5px;
+}
+.tree-item-debriefs > div {
+    font-style: italic;
+    font-size: small;
+}
+
+.search-box-list {
+    background: white; 
+    font-size: small; 
+    border: 1px solid lightgrey; 
+}
+.search-box-list > div {
+    padding: 8px; 
+    border-bottom: 1px solid lightgrey; 
 }
 
 .matter-textfield-standard {
