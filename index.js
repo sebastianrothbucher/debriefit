@@ -1,5 +1,6 @@
 httpVueLoader.register(Vue, 'components/tree-item.vue');
 httpVueLoader.register(Vue, 'components/search-box.vue');
+httpVueLoader.register(Vue, 'components/add-debrief.vue');
 httpVueLoader.register(Vue, 'components/add-item.vue');
 const app = new Vue({
     el: '#app',
@@ -159,11 +160,15 @@ const app = new Vue({
         },
         collapsed: {},
         selected: null,
+        showAddMenu: false,
     },
     methods: {
         selectFound(i) { // select and return to normal
             this.selected = i;
             setTimeout(() => this.selected = null, 100);
+        },
+        hideAddMenu() {
+            setTimeout(() => this.showAddMenu = false, 100);
         },
     },
 });

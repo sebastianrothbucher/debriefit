@@ -30,13 +30,13 @@ a, .link {
     font-size: small;
 }
 
-.search-box-list {
+.search-box-list, .ctx-menu {
     background: white; 
     z-index: 100;
     font-size: small; 
     border: 1px solid lightgrey; 
 }
-.search-box-list > div {
+.search-box-list > div, .ctx-menu > div {
     padding: 8px; 
     border-bottom: 1px solid lightgrey; 
 }
