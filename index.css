@@ -41,6 +41,10 @@ a, .link {
     border-bottom: 1px solid lightgrey; 
 }
 
+.search-box-list > div:hover, .ctx-menu > div:hover, .tree-item-title:hover {
+    background: #dce9f3;
+}
+
 .matter-textfield-standard {
     line-height: 1.2;
     border-top-width: 20px;
