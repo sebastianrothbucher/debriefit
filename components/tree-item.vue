@@ -1,20 +1,23 @@
 <template>
 <div class="tree-item" :style="{marginLeft: (indent > 0 ? '10px' : null)}">
     <div tabindex="0" ref="myself" class="tree-item-title">
-        {{i.t || '-'}} <span v-for="(ss, ii) in latestStatus" :key="ii" :title="ss.t" class="tree-item-title-status">{{ss.s || ss.t}}</span>
+        <span v-if="collapsed[i.id]" @click="$emit('expanded', i)" class="link little-symbol" :style="{'visibility': (hasChildren ? null : 'hidden')}" title="expand">➡️</span>
+        <span v-if="!collapsed[i.id]" @click="$emit('collapsed', i)" class="link little-symbol" :style="{'visibility': (hasChildren ? null : 'hidden')}" title="collapse">↘️</span>
+        {{i.t || '-'}} <span v-for="(ss, ii) in latestStatus" :key="ii" :title="ss.t" class="tree-item-title-status little-symbol">{{ss.s || ss.t}}</span>
     </div>
-    <div v-if="debriefTexts.length>0" class="tree-item-debriefs">
+    <div v-if="hasDebriefs" class="tree-item-debriefs">
         <div v-for="(tt, ii) in debriefTexts" :key="ii">{{tt}}</div><!-- TODO: hide on no focus / hover; TODO: reverse (newest top) -->
     </div>
-    <div class="tree-item-children">
+    <div v-if="(!collapsed[i.id]) && hasChildren" class="tree-item-children">
         <tree-item v-for="cc in (i.c || [])" :key="cc.id" :i="cc" 
-            :indent="indent+1" :debriefs="debriefs" :symbols="symbols" :selected="selected"></tree-item>
+            :indent="indent+1" :debriefs="debriefs" :symbols="symbols" :collapsed="collapsed" :selected="selected"
+            @collapsed="$emit('collapsed', $event)" @expanded="$emit('expanded', $event)"></tree-item>
     </div>
 </div>
 </template>
 <script>
 module.exports = {
-    props: ['i', 'indent', 'debriefs', 'symbols', 'selected'],
+    props: ['i', 'indent', 'debriefs', 'symbols', 'collapsed', 'selected'],
     data: () => ({
     }),
     watch: {
@@ -37,6 +40,12 @@ module.exports = {
         },
         debriefTexts() {
             return this.matchingDebriefLines.map(dl => dl.t);
+        },
+        hasDebriefs() {
+            return this.debriefTexts.length > 0;
+        },
+        hasChildren() {
+            return (this.i.c || []).length > 0;
         },
     },
     methods: {

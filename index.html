@@ -7,7 +7,8 @@
                 <search-box :tree="tree" @selected="selectFound($event)"></search-box>
             </div>
             <div>
-                <tree-item :i="tree" :indent=0 :debriefs="debriefs" :symbols="symbols" :selected="selected"></tree-item>
+                <tree-item :i="tree" :indent=0 :debriefs="debriefs" :symbols="symbols" :collapsed="collapsed" :selected="selected"
+                    @expanded="$set(collapsed, $event.id, false)" @collapsed="$set(collapsed, $event.id, true)"></tree-item>
             </div>
         </div>
         <link rel="stylesheet" type="text/css" href="lib/matter.css"/>

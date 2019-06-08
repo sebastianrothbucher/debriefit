@@ -1,6 +1,6 @@
 <template>
 <div class="search-box" style="position: relative" @focusin="startShow" @focusout="startHide">
-    <label class="search-box input matter-textfield-standard"><input type="search" size="50" v-model="search" @focus="selectedLine=-1" @keyup.down="moveSelect(+1, $event)" @keyup.up="moveSelect(-1, $event)" @keyup.enter="selectedLine>=0 && selectItem(filteredList[selectedLine].i)" placeholder=" "/><span>🔍</label>
+    <label class="search-box input matter-textfield-standard"><input type="search" size="50" v-model="search" @focus="selectedLine=-1" @keyup.down="moveSelect(+1, $event)" @keyup.up="moveSelect(-1, $event)" @keyup.enter="selectedLine>=0 && selectItem(filteredList[selectedLine].i)" placeholder=" "/><span title="find">🔍</label>
     <div v-if="optionsShown && filteredList.length>0" class="search-box-list" style="position: absolute; top: 100%; left: 0; ">
         <div :class="{'virtual-focus': selectedLine===ii}" tabindex="0" v-for="(ll, ii) in filteredList" :key="ll.i.id" @click="selectItem(ll.i)" @keyup.enter="selectItem(ll.i)">{{ll.t}}</div><!-- TODO: quick add -->
     </div>

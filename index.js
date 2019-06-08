@@ -156,6 +156,7 @@ const app = new Vue({
                 t: 'bad',
             },
         },
+        collapsed: {},
         selected: null,
     },
     methods: {

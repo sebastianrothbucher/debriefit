@@ -1,20 +1,23 @@
 body {
     font-family: sans-serif;
 }
+a, .link {
+    cursor: pointer; 
+}
 
 *:focus, .virtual-focus {
     outline: none;
     background: #c6dff3;
 }
+.little-symbol {
+    font-size: 70%;
+}
 
 .tree-item-title {
     padding: 5px; 
 }
-.tree-item-title-status {
-    font-size: 70%;
-}
 .tree-item-debriefs {
-    padding: 0 0 5px 5px;
+    padding: 0 0 5px 25px;
 }
 .tree-item-debriefs > div {
     font-style: italic;
