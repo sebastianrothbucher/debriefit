@@ -1,16 +1,27 @@
 <template>
-<div :style="{marginLeft: (indent > 0 ? '10px' : null)}">
-    <div tabindex="0">{{i.t || '-'}} <span v-for="(ss, ii) in latestStatus" :key="ii" :title="ss.t" :style="{fontSize: '70%'}">{{ss.s || ss.t}}</span></div>
-    <div v-for="(tt, ii) in debriefTexts" :key="ii" :style="{fontStyle: 'italic', fontSize: 'small'}">{{tt}}</div><!-- TODO: hide on no focus / hover -->
-    <tree-item v-for="cc in (i.c || [])" :key="cc.id" :i="cc" 
-        :indent="indent+1" :debriefs="debriefs" :symbols="symbols"></tree-item>
+<div class="tree-item" :style="{marginLeft: (indent > 0 ? '10px' : null)}">
+    <div tabindex="0" ref="myself" class="tree-item-title">{{i.t || '-'}} <span v-for="(ss, ii) in latestStatus" :key="ii" :title="ss.t" :style="{fontSize: '70%'}">{{ss.s || ss.t}}</span></div>
+    <div v-if="debriefTexts.length>0" class="tree-item-debriefs">
+        <div v-for="(tt, ii) in debriefTexts" :key="ii" :style="{fontStyle: 'italic', fontSize: 'small'}">{{tt}}</div><!-- TODO: hide on no focus / hover -->
+    </div>
+    <div class="tree-item-children">
+        <tree-item v-for="cc in (i.c || [])" :key="cc.id" :i="cc" 
+            :indent="indent+1" :debriefs="debriefs" :symbols="symbols" :selected="selected"></tree-item>
+    </div>
 </div>
 </template>
 <script>
 module.exports = {
-    props: ['i', 'indent', 'debriefs', 'symbols'],
+    props: ['i', 'indent', 'debriefs', 'symbols', 'selected'],
     data: () => ({
     }),
+    watch: {
+        selected(curr) {
+            if (curr === this.i) {
+                this.$nextTick(() => this.$refs.myself.focus());
+            }
+        },
+    },
     computed: {
         matchingDebriefLines() { // carry fw texts if need be, return l(ines) w/ debrief ID
             return this.debriefs.map(dd => {

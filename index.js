@@ -156,5 +156,12 @@ const app = new Vue({
                 t: 'bad',
             },
         },
+        selected: null,
+    },
+    methods: {
+        selectFound(i) { // select and return to normal
+            this.selected = i;
+            setTimeout(() => this.selected = null, 100);
+        },
     },
 });

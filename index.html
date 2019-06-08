@@ -3,9 +3,15 @@
     </head>
     <body>
         <div id="app">
-            <tree-item :i="tree" :indent=0 :debriefs="debriefs" :symbols="symbols"></tree-item>
-            <search-box :tree="tree"></search-box>
+            <div style="margin-bottom: 16px; ">
+                <search-box :tree="tree" @selected="selectFound($event)"></search-box>
+            </div>
+            <div>
+                <tree-item :i="tree" :indent=0 :debriefs="debriefs" :symbols="symbols" :selected="selected"></tree-item>
+            </div>
         </div>
+        <link rel="stylesheet" type="text/css" href="lib/matter.css"/>
+        <link rel="stylesheet" type="text/css" href="index.css"/>
         <script src="node_modules/vue/dist/vue.js"></script>
         <script src="node_modules/http-vue-loader/src/httpVueLoader.js"></script>
         <script src="index.js"></script>

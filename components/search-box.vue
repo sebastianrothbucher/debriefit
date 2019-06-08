@@ -1,7 +1,9 @@
 <template>
-<div>
-    <label><input type="search" size="50" v-model="search"/></label>
-    <div v-for="ll in filteredList" :key="ll.i.id">{{ll.t}}</div><!-- TODO: quick add -->
+<div class="search-box" style="position: relative" @focusin="startShow" @focusout="startHide">
+    <label class="search-box input matter-textfield-standard"><input type="search" size="50" v-model="search" placeholder=" "/><span>🔍</label>
+    <div v-if="optionsShown && filteredList.length>0" class="search-box-list" style="position: absolute; top: 100%; left: 0; background: white; font-size: small; border: 1px solid lightgrey; ">
+        <div style="padding: 8px; border-bottom: 1px solid lightgrey; " tabindex="0" v-for="ll in filteredList" :key="ll.i.id" @click="selectItem(ll.i)" @keyup-enter="selectItem(ll.i)">{{ll.t}}</div><!-- TODO: quick add -->
+    </div>
 </div>
 </template>
 <script>
@@ -9,6 +11,8 @@ module.exports = {
     props: ['tree'],
     data: () => ({
         search: '',
+        optionsShown: false,
+        blurTimeout: null, 
     }),
     computed: {
         lookupList() {
@@ -37,7 +41,19 @@ module.exports = {
             return this.lookupList.filter(l => matchRemain(l.t, searchParts));
         },
     },
-    methods: { // TODO: event on choose
+    methods: {
+        selectItem(i) {
+            this.$emit('selected', i);
+        },
+        startShow() {
+            clearTimeout(this.blurTimeout);
+            this.optionsShown = true;
+        },
+        startHide() {
+            this.blurTimeout = setTimeout(() => { // tab = blur & new focus
+                this.optionsShown = false;
+            }, 100);
+        },
     },
 };
 </script>

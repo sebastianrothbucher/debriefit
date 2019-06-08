@@ -2,6 +2,7 @@
   "name": "tasktree",
   "version": "1.0.0",
   "scripts": {
+    "postinstall": "mkdir -p lib/ && curl 'https://github.com/finnhvman/matter/releases/download/0.2.2/matter.css' -L -o lib/matter.css",
     "test": "jest"
   },
   "dependencies": {
