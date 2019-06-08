@@ -9,6 +9,12 @@ a, .link {
     outline: none;
     background: #c6dff3;
 }
+.focus-only {
+    visibility: hidden;
+}
+*:focus .focus-only, .focus-only:focus {
+    visibility: visible;
+}
 .little-symbol {
     font-size: 70%;
 }
@@ -26,6 +32,7 @@ a, .link {
 
 .search-box-list {
     background: white; 
+    z-index: 100;
     font-size: small; 
     border: 1px solid lightgrey; 
 }
@@ -37,4 +44,9 @@ a, .link {
 .matter-textfield-standard {
     line-height: 1.2;
     border-top-width: 20px;
+}
+.matter-button-contained.round {
+    min-height: 40px;
+    min-width: 40px;
+    border-radius: 20px;
 }

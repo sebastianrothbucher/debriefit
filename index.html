@@ -10,6 +10,7 @@
                 <tree-item :i="tree" :indent=0 :debriefs="debriefs" :symbols="symbols" :collapsed="collapsed" :selected="selected"
                     @expanded="$set(collapsed, $event.id, false)" @collapsed="$set(collapsed, $event.id, true)"></tree-item>
             </div>
+            <div style="margin-top: 20px; "><button class="matter-button-contained round" @click="$refs.addItem.showAdd()">+</button><add-item ref="addItem" :tree="tree"/></div> <!-- TODO: menu for also adding debriefs -->
         </div>
         <link rel="stylesheet" type="text/css" href="lib/matter.css"/>
         <link rel="stylesheet" type="text/css" href="index.css"/>

@@ -4,6 +4,7 @@
         <span v-if="collapsed[i.id]" @click="$emit('expanded', i)" class="link little-symbol" :style="{'visibility': (hasChildren ? null : 'hidden')}" title="expand">➡️</span>
         <span v-if="!collapsed[i.id]" @click="$emit('collapsed', i)" class="link little-symbol" :style="{'visibility': (hasChildren ? null : 'hidden')}" title="collapse">↘️</span>
         {{i.t || '-'}} <span v-for="(ss, ii) in latestStatus" :key="ii" :title="ss.t" class="tree-item-title-status little-symbol">{{ss.s || ss.t}}</span>
+        <span class="link little-symbol focus-only" title="add">➕</span><!-- TODO: call dialog for debrief / children -->
     </div>
     <div v-if="hasDebriefs" class="tree-item-debriefs">
         <div v-for="(tt, ii) in debriefTexts" :key="ii">{{tt}}</div><!-- TODO: hide on no focus / hover; TODO: reverse (newest top) -->
