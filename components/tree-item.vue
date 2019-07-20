@@ -7,7 +7,7 @@
         <span class="link little-symbol focus-only" title="add">➕</span><!-- TODO: call dialog for debrief / children -->
     </div>
     <div v-if="hasDebriefs" class="tree-item-debriefs">
-        <div v-for="(tt, ii) in debriefTexts" :key="ii">{{tt}}</div><!-- TODO: hide on no focus / hover; TODO: reverse (newest top) -->
+        <div v-for="(tt, ii) in debriefTexts" :key="ii">{{tt}}</div><!-- TODO: hide on no focus / hover -->
     </div>
     <div v-if="(!collapsed[i.id]) && hasChildren" class="tree-item-children">
         <tree-item v-for="cc in (i.c || [])" :key="cc.id" :i="cc" 
@@ -29,10 +29,10 @@ module.exports = {
         },
     },
     computed: {
-        matchingDebriefLines() { // carry fw texts if need be, return l(ines) w/ debrief ID
+        matchingDebriefLines() {
             return this.debriefs.map(dd => {
                 const foundLine = dd.l.filter(dl => dl.tid === this.i.id)[0]; // (only one matches)
-                return foundLine ? {_debriefId: dd.id, ...foundLine} : null;
+                return foundLine ? {_debriefId: dd.id, _t: dd.t, ...foundLine} : null;
             }).filter(dl => (!!dl));
         },
         latestStatus() {
@@ -40,7 +40,7 @@ module.exports = {
                 .map(ss => (this.symbols[ss] || {t: ss}));
         },
         debriefTexts() {
-            return this.matchingDebriefLines.map(dl => dl.t);
+            return this.matchingDebriefLines.map(dl => dl._t).reverse();
         },
         hasDebriefs() {
             return this.debriefTexts.length > 0;

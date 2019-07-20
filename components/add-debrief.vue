@@ -51,10 +51,10 @@ module.exports = {
             }
             this.debriefs.push({
                 id: uuid(),
+                t: this.newContent.trim(),
                 l: [
                     {
                         tid: this.selI.id,
-                        t: this.newContent.trim(),
                         status: null, // TODO: inquire
                     },
                 ], // TODO: several

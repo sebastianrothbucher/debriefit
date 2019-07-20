@@ -86,16 +86,15 @@ const app = new Vue({
         debriefs: [ // chrono order
             {
                 id: '05494a90bcf62e86fae2d0336f974303',
+                t: 'Initial template created w/ text and one unsplash img as plain-HTML; styles are h1, p, p.twocol, img.rightside',
                 l: [
                     {
                         tid: 'ea499c20837bb402aa4d0bef921588d1',
-                        t: 'Initial template created w/ text and one unsplash img as plain-HTML; styles are h1, p, p.twocol, img.rightside',
-                        status: null, // none
+                        status: null, // none (or prev)
                     },
                     {
                         tid: 'a9e644184f4943f6842c98d884327a0f',
-                        t: null, // use prev
-                        status: ['25%', 'progress', 'ontrack'],
+                        status: ['25%', 'progress', 'ontrack'], // (can still cache in target node)
                     }
                 ],
             },
