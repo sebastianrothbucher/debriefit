@@ -7,6 +7,10 @@
     <div style="margin-bottom: 10px">
         <label class="add-debrief-content matter-textfield-standard"><textarea ref="txt" :disabled="!selI" v-model="newContent" @keydown.ctrl.enter="addDebrief" @keydown.meta.enter="addDebrief" placeholder=" " style="min-width: 420px; min-height: 150px;"></textarea><span>Debrief content</span></label>
     </div>
+    <div style="margin-bottom: 10px">
+        <div><label class="add-debrief-morechg matter-checkbox"><input type="checkbox" v-model="moreChg" :disabled="!selI" /><span>Make more changes</span></label></div>
+        <div v-if="moreChg && selI"><item-path :i="selI" :tree="tree"></item-path></div>
+    </div>
     <div style="text-align: right; ">
         <button class="matter-button-outlined" @click="$refs.myself.close()">Cancel</button>
         <button class="matter-button-contained" :disabled="!canCreate" @click="addDebrief">Create</button>
@@ -20,6 +24,7 @@ module.exports = {
     data: () => ({
         selI: null,
         newContent: '',
+        moreChg: false,
     }),
     watch: {
         i(curr, old) {

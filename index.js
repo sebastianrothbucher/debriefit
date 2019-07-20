@@ -1,4 +1,5 @@
 httpVueLoader.register(Vue, 'components/tree-item.vue');
+httpVueLoader.register(Vue, 'components/item-path.vue');
 httpVueLoader.register(Vue, 'components/search-box.vue');
 httpVueLoader.register(Vue, 'components/add-debrief.vue');
 httpVueLoader.register(Vue, 'components/add-item.vue');
