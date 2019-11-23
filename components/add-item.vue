@@ -49,14 +49,11 @@ module.exports = {
             if (!this.canCreate) { // could still happen with enter
                 return;
             }
-            if (!this.selI.c) { // (b defensive)
-                this.$set(this.selI, c, []);
-            }
-            this.selI.c.push({
+            this.$store.dispatch('addItem', {parent: this.selI, item: {
                 id: uuid(),
                 t: this.newTitle.trim(),
                 c: [],
-            });
+            }});
             this.$refs.myself.close();
         },
     },

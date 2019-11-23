@@ -3,9 +3,12 @@ httpVueLoader.register(Vue, 'components/item-path.vue');
 httpVueLoader.register(Vue, 'components/search-box.vue');
 httpVueLoader.register(Vue, 'components/add-debrief.vue');
 httpVueLoader.register(Vue, 'components/add-item.vue');
-const app = new Vue({
-    el: '#app',
-    data: {
+const vuexLocal = new VuexPersistence.VuexPersistence({
+    key: 'debriefit',
+    storage: window.localStorage,
+});
+const store = new Vuex.Store({
+    state: {
         tree: {
             id: '2ef4ee9c44778c96fdb2fc13139105b1',
             t: 'All projects', 
@@ -100,6 +103,32 @@ const app = new Vue({
                 ],
             },
         ],
+    },
+    mutations: {
+        ADD_DEBRIEF(state, {debrief}) {
+            state.debriefs.push(debrief);
+        },
+        ADD_ITEM(state, {parent, item}) {
+            if (!parent.c) { // (b defensive)
+                Vue.set(parent, 'c', []);
+            }
+            parent.c.push(item);
+        },
+    },
+    actions: {
+        addDebrief(context, {debrief}) {
+            context.commit('ADD_DEBRIEF', {debrief});
+        },
+        addItem(context, {parent, item}) {
+            context.commit('ADD_ITEM', {parent, item});
+        },
+    },
+    plugins: [vuexLocal.plugin],
+});
+const app = new Vue({
+    el: '#app',
+    store,
+    data: {
         symbols: {
             '0%': {
                 s: '🌑',
@@ -173,6 +202,14 @@ const app = new Vue({
         collapsed: {},
         selected: null,
         showAddMenu: false,
+    },
+    computed: {
+        tree () {
+            return this.$store.state.tree;
+        },
+        debriefs () {
+            return this.$store.state.debriefs;
+        },
     },
     methods: {
         selectFound(i) { // select and return to normal

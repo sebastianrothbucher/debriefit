@@ -54,7 +54,7 @@ module.exports = {
             if (!this.canCreate) { // could still happen with enter
                 return;
             }
-            this.debriefs.push({
+            this.$store.dispatch('addDebrief', {debrief: {
                 id: uuid(),
                 t: this.newContent.trim(),
                 l: [
@@ -63,7 +63,7 @@ module.exports = {
                         status: null, // TODO: inquire
                     },
                 ], // TODO: several
-            });
+            }});
             this.$refs.myself.close();
         },
     },
