@@ -8,4 +8,4 @@ npm install && npm run start
 
 See here: 
 
-<img src="Bildschirmfoto 2019-07-02%20um%2023.22.27.png" style="width: 400px; "/>
+<img src="Bildschirmfoto 2019-07-02%20um%2023.22.27.png" width="400"/>
