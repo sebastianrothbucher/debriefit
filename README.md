@@ -6,7 +6,7 @@ very alpha - yet: document faster (meaning: start documenting at all): add notes
 npm install && npm run start
 ```
 
-or: open here: (https://sebastianrothbucher.github.io/debriefit/)[https://sebastianrothbucher.github.io/debriefit/]
+or: open here: [https://sebastianrothbucher.github.io/debriefit/]
 
 See here: 
 
